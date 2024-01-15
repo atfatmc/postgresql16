@@ -1,0 +1,18 @@
+ALTER SYSTEM SET logging_collector = on;
+ALTER SYSTEM SET log_filename = 'postgresql-%a.log';
+ALTER SYSTEM SET log_truncate_on_rotation = on;
+ALTER SYSTEM SET log_rotation_size = 0;
+ALTER SYSTEM SET log_autovacuum_min_duration = 0;
+ALTER SYSTEM SET log_min_duration_statement = '1s';
+ALTER SYSTEM SET log_checkpoints = on;
+ALTER SYSTEM SET log_statement = ddl;
+ALTER SYSTEM SET log_line_prefix = '<time=%m app=%a host=%h user=%u db=%d pid=%p line=%l trx=%x> ';
+ALTER SYSTEM SET log_lock_waits = on;
+ALTER SYSTEM SET log_temp_files = 0;
+ALTER SYSTEM SET log_timezone = 'Turkey';
+
+SELECT pg_reload_conf();
+
+
+ALTER SYSTEM SET log_destination = 'stderr,csvlog';
+select  pg_read_file(pg_current_logfile('stderr'));
