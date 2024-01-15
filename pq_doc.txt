@@ -1,0 +1,27 @@
+postgres (sudo su - postgres)
+  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /usr/share/keyrings/pgdg-archive-keyring.gpg
+  echo "deb [signed-by=/usr/share/keyrings/pgdg-archive-keyring.gpg] http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+  apt update
+  apt install postgresql-16
+  pg_lsclusters
+
+  mkdir -p /pg_data/16/main
+  chown -R postgres: /pg_data
+  chmod 700 -R /pg_data
+  cd /pg_data/16/main
+
+  pg_dropcluster 16 main --stop
+  pg_createcluster 16 main -D /pg_data/16/main -- --data-checksums
+  pg_lsclusters
+
+  systemctl start postgresql@16-main
+  systemctl status postgresql@16-main
+  systemctl enable postgresql@16-main
+
+  pg_lsclusters
+    
+    
+postgres (sudo su - postgres)
+  vim /var/lib/postgresql/.bash_profile
+    export PGDATA=/pg_data/16/main
+    export PATH=$PATH:/usr/lib/postgresql/16/bin
