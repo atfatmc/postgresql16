@@ -1,0 +1,44 @@
+postgresql
+  psql
+    
+    select * from pg_settings;
+    show all;
+    show work_mem;
+    
+    select * from pg_file_settings;
+    select * from pg_db_role_setting;
+    
+    set work_mem TO '20MB';
+    set local work_mem TO '20MB';
+    reset work_mem ;
+    set work_mem TO DEFAULT;
+    
+    
+    
+    discard all;
+    create table my_table(id serial) with (autovacuum_analyze_scale_factor = 0.01);
+    alter table my_table set (autovacuum_analyze_scale_factor = 0.02);
+    select relname, reloptions from pg_class where reloptions is not null;
+    
+------------------------------------------------------------------------------
+postgresql.conf
+  |-> include.. 
+  |-> include_dir
+  |-> hba_file
+  |-> ident_file
+
+postgresql.auto.conf
+command line
+database
+user
+user + database
+
+  |-> table
+  |-> index
+  |-> table space
+
+session
+transaction 
+  show -> 
+     
+

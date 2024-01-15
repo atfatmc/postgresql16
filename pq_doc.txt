@@ -1,4 +1,4 @@
-postgres (sudo su - postgres)
+postgres (sudo su - root)
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /usr/share/keyrings/pgdg-archive-keyring.gpg
   echo "deb [signed-by=/usr/share/keyrings/pgdg-archive-keyring.gpg] http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
   apt update
@@ -25,3 +25,7 @@ postgres (sudo su - postgres)
   vim /var/lib/postgresql/.bash_profile
     export PGDATA=/pg_data/16/main
     export PATH=$PATH:/usr/lib/postgresql/16/bin
+
+
+
+

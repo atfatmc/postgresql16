@@ -1,0 +1,36 @@
+postgres
+  psql
+    alter system set listen_addresses TO '0.0.0.0';
+    
+    select pg_reload_conf();
+    select name from pg_settings where pending_restart;
+    select category, name from pg_settings where context = 'internal';
+    
+    select context, count(*) name from pg_settings group by 1;
+    
+root
+  systemctl restart postgresql@16-main
+
+postgres
+  psql
+    show listen_addresses;
+    
+
+postgres
+  vim /etc/postgresql/16/main/pg_hba.conf
+    host    project         pupil           192.168.56.1/32         "scram-sha-256"
+
+  
+  psql
+    select * from pg_hba_file_rules;
+    select pg_reload_conf();
+
+    select * from pg_shadow;
+    
+    alter system set password_encryption TO "scram-sha-256";
+    select pg_reload_conf();
+    
+    alter role pupil password '123';
+    select * from pg_shadow;
+    
+    

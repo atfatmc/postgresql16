@@ -1,0 +1,23 @@
+postgres (sudo su - root)
+  localectl list-locales
+  vim /etc/locale.gen
+    tr_TR.UTF-8 UTF-8
+  locale-gen
+  
+  localectl list-locales
+  
+  systemctl restart postgresql@16-main
+
+
+postgres (sudo su - postgres)
+  psql
+    CREATE DATABASE project ENCODING='UTF-8' LOCALE = 'tr_TR.UTF-8' TEMPLATE template0;
+    CREATE ROLE atfatmc SUPERUSER LOGIN PASSWORD 'atfatmc';
+    
+    select * from pg_authid;
+    select * from pg_db_role_setting;
+    select * from pg_roles;
+    \d+ pg_roles
+    
+    \c project
+      select pg_import_system_collations('pg_catalog'::regnamespace);
