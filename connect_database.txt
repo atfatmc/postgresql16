@@ -18,7 +18,7 @@ postgres
 
 postgres
   vim /etc/postgresql/16/main/pg_hba.conf
-    host    project         pupil           192.168.56.1/32         "scram-sha-256"
+    host    project         pupil           192.168.56.1/32         scram-sha-256
 
   
   psql
