@@ -1,0 +1,6 @@
+SQL injection için kullanılabilir.
+
+--qupte_ident('text')
+
+
+select format('select %L;', gs) from generate_series(1,10) gs; \gexec
